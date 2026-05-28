@@ -5,5 +5,5 @@ import com.jcaa.usersmanagement.domain.model.RoomModel;
 import java.util.List;
 
 public interface GetAllRoomsUseCase {
-    List<RoomModel> excute();
+    List<RoomModel> getAll();
 }
