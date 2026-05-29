@@ -20,24 +20,20 @@ public class RoomModel {
         return new RoomModel(name, num, RoomStatus.ENABLED);
     }
 
-    public static RoomModel reconstitute(RoomName name, RoomNum num, RoomStatus status) {
-        return new RoomModel(name, num, status);
-    }
-
     public void rename(RoomName newName) {
         this.roomName = newName;
     }
 
     public void enable() {
         if (this.roomStatus == RoomStatus.ENABLED) {
-            throw new InvalidRoomStateException("The room is already enabled. Redundant transition attempted for room: " + this.roomNum.num());
+            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
         }
         this.roomStatus = RoomStatus.ENABLED;
     }
 
     public void disable() {
         if (this.roomStatus == RoomStatus.DISABLED) {
-            throw new InvalidRoomStateException("The room is already disabled. Redundant transition attempted for room: " + this.roomNum.num());
+            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
         }
         this.roomStatus = RoomStatus.DISABLED;
     }
