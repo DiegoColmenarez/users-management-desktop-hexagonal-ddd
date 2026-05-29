@@ -77,6 +77,7 @@ public final class DependencyContainer {
     final DeleteRoomUseCase deleteRoomUseCase = new DeleteRoomService(roomRepository, roomRepository, validator);
     final GetRoomByNumUseCase getRoomByNumUseCase = new GetRoomByNumService(roomRepository);
     final GetRoomByNameUseCase getRoomByNameUseCase = new GetRoomByNameService(roomRepository);
+    final GetAllRoomsUseCase getAllRoomsUseCase = new GetAllRoomsService(roomRepository); // LA PIEZA AGREGADA
 
     this.roomController =
             new RoomController(
@@ -84,7 +85,8 @@ public final class DependencyContainer {
                     updateRoomUseCase,
                     deleteRoomUseCase,
                     getRoomByNumUseCase,
-                    getRoomByNameUseCase);
+                    getRoomByNameUseCase,
+                    getAllRoomsUseCase); // EL SEXTO ARGUMENTO AGREGADO
   }
 
   public UserController userController() {
