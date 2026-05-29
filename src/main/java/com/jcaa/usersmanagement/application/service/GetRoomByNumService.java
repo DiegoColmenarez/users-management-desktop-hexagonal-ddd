@@ -13,7 +13,7 @@ public final class GetRoomByNumService implements GetRoomByNumUseCase {
     private final GetRoomByNumPort getRoomByNumPort;
 
     @Override
-    public RoomModel excute(Integer num) {
+    public RoomModel execute(Integer num) {
         final RoomNum roomNum = new RoomNum(num);
         return getRoomByNumPort.getByNum(roomNum)
                 .orElseThrow(() -> RoomNotFoundException.becauseNumRoomWasNotFound(roomNum.num()));
