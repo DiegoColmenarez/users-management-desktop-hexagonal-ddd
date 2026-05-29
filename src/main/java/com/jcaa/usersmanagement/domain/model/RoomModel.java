@@ -20,6 +20,10 @@ public class RoomModel {
         return new RoomModel(name, num, RoomStatus.ENABLED);
     }
 
+    public static RoomModel reconstitute(RoomName name, RoomNum num, RoomStatus status) {
+        return new RoomModel(name, num, status);
+    }
+
     public void rename(RoomName newName) {
         this.roomName = newName;
     }
