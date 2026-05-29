@@ -1,7 +1,6 @@
 package com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.controller;
 
 import com.jcaa.usersmanagement.application.port.in.*;
-import com.jcaa.usersmanagement.application.service.dto.command.UpdateRoomCommand;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.dto.CreateRoomRequest;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.dto.RoomResponse;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.dto.UpdateRoomRequest;
@@ -23,12 +22,10 @@ public final class RoomController {
         return RoomDesktopMapper.toResponse(room);
     }
 
-    public static UpdateRoomCommand toUpdateCommand(UpdateRoomRequest request) {
-        return new UpdateRoomCommand(
-                request.number(),
-                request.newName(),
-                request.newStatus()
-        );
+    public RoomResponse updateRoom(final UpdateRoomRequest request) {
+        final var command = RoomDesktopMapper.toUpdateCommand(request);
+        final var room = updateRoomUseCase.execute(command);
+        return RoomDesktopMapper.toResponse(room);
     }
 
     public void deleteRoom(final Integer number) {

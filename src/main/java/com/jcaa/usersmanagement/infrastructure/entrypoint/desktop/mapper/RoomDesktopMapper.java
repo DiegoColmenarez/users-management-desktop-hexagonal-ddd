@@ -14,8 +14,8 @@ public final class RoomDesktopMapper {
         return new CreateRoomCommand(request.number(), request.name());
     }
 
-    public static UpdateRoomCommand toUpdateCommand(UpdateRoomRequest request, String newStatus) {
-        return new UpdateRoomCommand(request.number(), request.newName(), newStatus);
+    public static UpdateRoomCommand toUpdateCommand(UpdateRoomRequest request) {
+        return new UpdateRoomCommand(request.number(), request.newName(), request.newStatus());
     }
 
     public static DeleteRoomCommand toDeleteCommand(Integer number) {
