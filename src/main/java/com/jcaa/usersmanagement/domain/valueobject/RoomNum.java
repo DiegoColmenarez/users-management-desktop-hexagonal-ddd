@@ -1,7 +1,7 @@
 package com.jcaa.usersmanagement.domain.valueobject;
 
 import com.jcaa.usersmanagement.domain.exception.InvalidRoomNumException;
-import com.jcaa.usersmanagement.domain.exception.InvalidUserIdException;
+
 
 public record RoomNum(Integer num) {
     public RoomNum {

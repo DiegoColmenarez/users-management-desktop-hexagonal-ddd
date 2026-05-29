@@ -15,8 +15,8 @@ public class RoomModel {
         this.roomStatus = roomStatus;
     }
 
-    public static RoomModel factoryRoom(RoomName name, RoomNum num, RoomStatus status) {
-        return new RoomModel(name, num, status);
+    public static RoomModel factoryRoom(RoomName name, RoomNum num) {
+        return new RoomModel(name, num, RoomStatus.ENABLED);
     }
 
     public void enable() {
