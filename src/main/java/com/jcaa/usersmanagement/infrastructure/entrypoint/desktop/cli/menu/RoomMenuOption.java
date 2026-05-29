@@ -8,7 +8,8 @@ public enum RoomMenuOption {
     DELETE_ROOM(3, "Delete Room"),
     FIND_ROOM_BY_NUM(4, "Find Room by Number"),
     FIND_ROOM_BY_NAME(5, "Find Room by Name"),
-    EXIT(6, "Exit");
+    FIND_ALL_ROOMS(6, "List All Rooms"),
+    EXIT(7, "Exit");
 
     private final int number;
     private final String description;

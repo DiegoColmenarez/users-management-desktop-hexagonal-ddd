@@ -7,6 +7,9 @@ import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.dto.UpdateRoom
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.mapper.RoomDesktopMapper;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 public final class RoomController {
 
@@ -15,6 +18,7 @@ public final class RoomController {
     private final DeleteRoomUseCase deleteRoomUseCase;
     private final GetRoomByNumUseCase getRoomByNumUseCase;
     private final GetRoomByNameUseCase getRoomByNameUseCase;
+    private final GetAllRoomsUseCase getAllRoomsUseCase;
 
     public RoomResponse createRoom(final CreateRoomRequest request) {
         final var command = RoomDesktopMapper.toCreateCommand(request);
@@ -41,5 +45,11 @@ public final class RoomController {
     public RoomResponse getRoomByName(final String name) {
         final var room = getRoomByNameUseCase.execute(name);
         return RoomDesktopMapper.toResponse(room);
+    }
+
+    public List<RoomResponse> getAllRooms() {
+        return getAllRoomsUseCase.execute().stream()
+                .map(RoomDesktopMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }
