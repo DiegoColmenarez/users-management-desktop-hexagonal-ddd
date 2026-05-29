@@ -3,9 +3,10 @@ package com.jcaa.usersmanagement.domain.model;
 import com.jcaa.usersmanagement.domain.enums.RoomStatus;
 import com.jcaa.usersmanagement.domain.valueobject.RoomName;
 import com.jcaa.usersmanagement.domain.valueobject.RoomNum;
+import com.jcaa.usersmanagement.domain.exception.InvalidRoomStateException;
 
 public class RoomModel {
-    private final RoomName roomName;
+    private RoomName roomName;
     private final RoomNum roomNum;
     private RoomStatus roomStatus;
 
@@ -19,10 +20,21 @@ public class RoomModel {
         return new RoomModel(name, num, RoomStatus.ENABLED);
     }
 
+    public void rename(RoomName newName) {
+        this.roomName = newName;
+    }
+
     public void enable() {
+        if (this.roomStatus == RoomStatus.ENABLED) {
+            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
+        }
         this.roomStatus = RoomStatus.ENABLED;
     }
+
     public void disable() {
+        if (this.roomStatus == RoomStatus.DISABLED) {
+            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
+        }
         this.roomStatus = RoomStatus.DISABLED;
     }
 
@@ -33,6 +45,7 @@ public class RoomModel {
     public Integer roomNum() {
         return this.roomNum.num();
     }
+
     public RoomStatus roomStatus(){
         return this.roomStatus;
     }
