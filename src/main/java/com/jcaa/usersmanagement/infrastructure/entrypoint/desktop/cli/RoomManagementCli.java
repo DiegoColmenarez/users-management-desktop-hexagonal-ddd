@@ -3,11 +3,10 @@ package com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.handler.*;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.io.ConsoleIO;
 import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.cli.menu.RoomMenuOption;
-import lombok.RequiredArgsConstructor;
+import com.jcaa.usersmanagement.infrastructure.entrypoint.desktop.controller.RoomController;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class RoomManagementCli {
 
     private final ConsoleIO console;
@@ -17,6 +16,17 @@ public class RoomManagementCli {
     private final FindRoomByNumHandler findRoomByNumHandler;
     private final FindRoomByNameHandler findRoomByNameHandler;
     private final FindAllRoomsHandler findAllRoomsHandler;
+
+    // EL CONSTRUCTOR CORREGIDO: Recibe las 2 cosas del Main y arma los 6 handlers adentro
+    public RoomManagementCli(RoomController roomController, ConsoleIO console) {
+        this.console = console;
+        this.createRoomHandler = new CreateRoomHandler(roomController, console);
+        this.updateRoomHandler = new UpdateRoomHandler(roomController, console);
+        this.deleteRoomHandler = new DeleteRoomHandler(roomController, console);
+        this.findRoomByNumHandler = new FindRoomByNumHandler(roomController, console);
+        this.findRoomByNameHandler = new FindRoomByNameHandler(roomController, console);
+        this.findAllRoomsHandler = new FindAllRoomsHandler(roomController, console);
+    }
 
     public void run() {
         boolean exit = false;
@@ -46,7 +56,7 @@ public class RoomManagementCli {
                     case FIND_ROOM_BY_NAME -> findRoomByNameHandler.handle();
                     case FIND_ALL_ROOMS -> findAllRoomsHandler.handle();
                     case EXIT -> {
-                        console.println("  Exiting Room Management System... Goodbye!");
+                        console.println("  Exiting Room Management System... Returning to Main Menu.");
                         exit = true;
                     }
                 }
