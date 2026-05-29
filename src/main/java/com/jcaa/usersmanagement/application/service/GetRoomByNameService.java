@@ -13,7 +13,7 @@ public final class GetRoomByNameService implements GetRoomByNameUseCase {
     private final GetRoomByNamePort getRoomByNamePort;
 
     @Override
-    public RoomModel excute(String name) {
+    public RoomModel execute(String name) {
         final RoomName roomName = new RoomName(name);
         return getRoomByNamePort.getByName(roomName).orElseThrow(() -> RoomNotFoundException.becauseNameRoomWasNotFound(roomName.name()));
     }
