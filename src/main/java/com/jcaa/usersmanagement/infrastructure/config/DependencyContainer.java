@@ -47,7 +47,6 @@ public final class DependencyContainer {
     );
     final RoomRepositoryMySQL roomRepository = new RoomRepositoryMySQL(dbConfig);
 
-    // 2. Servicios de Notificación y validación comunes
     final JavaMailEmailSenderAdapter emailSender =
             new JavaMailEmailSenderAdapter(buildSmtpConfig(properties));
     final EmailNotificationService emailNotification = new EmailNotificationService(emailSender);
@@ -77,7 +76,7 @@ public final class DependencyContainer {
     final DeleteRoomUseCase deleteRoomUseCase = new DeleteRoomService(roomRepository, roomRepository, validator);
     final GetRoomByNumUseCase getRoomByNumUseCase = new GetRoomByNumService(roomRepository);
     final GetRoomByNameUseCase getRoomByNameUseCase = new GetRoomByNameService(roomRepository);
-    final GetAllRoomsUseCase getAllRoomsUseCase = new GetAllRoomsService(roomRepository); // LA PIEZA AGREGADA
+    final GetAllRoomsUseCase getAllRoomsUseCase = new GetAllRoomsService(roomRepository);
 
     this.roomController =
             new RoomController(
@@ -86,7 +85,7 @@ public final class DependencyContainer {
                     deleteRoomUseCase,
                     getRoomByNumUseCase,
                     getRoomByNameUseCase,
-                    getAllRoomsUseCase); // EL SEXTO ARGUMENTO AGREGADO
+                    getAllRoomsUseCase);
   }
 
   public UserController userController() {
