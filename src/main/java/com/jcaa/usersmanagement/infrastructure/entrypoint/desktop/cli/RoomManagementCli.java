@@ -17,7 +17,6 @@ public class RoomManagementCli {
     private final FindRoomByNameHandler findRoomByNameHandler;
     private final FindAllRoomsHandler findAllRoomsHandler;
 
-    // EL CONSTRUCTOR CORREGIDO: Recibe las 2 cosas del Main y arma los 6 handlers adentro
     public RoomManagementCli(RoomController roomController, ConsoleIO console) {
         this.console = console;
         this.createRoomHandler = new CreateRoomHandler(roomController, console);
