@@ -25,21 +25,15 @@ public final class UpdateRoomService implements UpdateRoomUseCase {
     @Override
     public RoomModel execute(final UpdateRoomCommand command) {
         validateCommand(command);
+
         final RoomNum roomNum = new RoomNum(command.number());
         RoomModel existingRoom = getRoomByNumPort.getByNum(roomNum)
                 .orElseThrow(() -> RoomNotFoundException.becauseNumRoomWasNotFound(roomNum.num()));
 
-        if (!command.newName().equals(existingRoom.roomName())) {
-            existingRoom.rename(new RoomName(command.newName()));
-        }
-
+        RoomName newName = new RoomName(command.newName());
         RoomStatus targetStatus = RoomStatus.valueOf(command.newStatus().toUpperCase());
 
-        if (targetStatus == RoomStatus.ENABLED && existingRoom.roomStatus() != RoomStatus.ENABLED) {
-            existingRoom.enable();
-        } else if (targetStatus == RoomStatus.DISABLED && existingRoom.roomStatus() != RoomStatus.DISABLED) {
-            existingRoom.disable();
-        }
+        existingRoom.updateProfile(newName, targetStatus);
 
         return saveRoomPort.save(existingRoom);
     }

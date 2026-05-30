@@ -42,10 +42,10 @@ public class RoomModel {
         this.roomStatus = RoomStatus.DISABLED;
     }
     public void updateProfile(RoomName newName, RoomStatus targetStatus){
-        if (this.roomName != newName){
+        if (!this.roomName.equals(newName)){
             this.rename(newName);
         }
-        if (this.roomStatus != targetStatus) {
+        if (this.roomStatus.equals(targetStatus)) {
             if (targetStatus == RoomStatus.ENABLED) {
                 this.enable();
             } else if (targetStatus == RoomStatus.DISABLED) {
