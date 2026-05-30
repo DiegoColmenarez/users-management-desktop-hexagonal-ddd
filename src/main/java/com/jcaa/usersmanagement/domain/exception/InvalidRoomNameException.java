@@ -5,7 +5,7 @@ public class InvalidRoomNameException extends DomainException{
         super(message);
     }
     private static final String MESSAGE_EMPTY = "No puede estar vacio, por favor ingrese un nombre valido";
-    private static final String MESSAGE_TOO_SHORT = "Nombre demasiado corto, por facor ingrese un nombre valido. carateres minimos: %d";
+    private static final String MESSAGE_TOO_SHORT = "Nombre demasiado corto, por favor ingrese un nombre valido. caracteres minimos: %d";
 
     public static InvalidRoomNameException nameIsEmpty() {
         return new InvalidRoomNameException(MESSAGE_EMPTY);

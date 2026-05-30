@@ -8,7 +8,7 @@ public record RoomName(String name) {
     private static final int MINIMUM_LENGTH = 3;
 
     public RoomName {
-        final String normalizedName = Objects.requireNonNull(name, "UserName cannot be null").trim();
+        final String normalizedName = Objects.requireNonNull(name, "Room name cannot be null").trim();
         validateNotEmpty(normalizedName);
         validateMinimumLength(normalizedName);
         name = normalizedName;

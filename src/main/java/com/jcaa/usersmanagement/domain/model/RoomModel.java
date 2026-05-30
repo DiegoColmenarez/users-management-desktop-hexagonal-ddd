@@ -1,9 +1,9 @@
 package com.jcaa.usersmanagement.domain.model;
 
 import com.jcaa.usersmanagement.domain.enums.RoomStatus;
+import com.jcaa.usersmanagement.domain.exception.InvalidRoomStatusException;
 import com.jcaa.usersmanagement.domain.valueobject.RoomName;
 import com.jcaa.usersmanagement.domain.valueobject.RoomNum;
-import com.jcaa.usersmanagement.domain.exception.InvalidRoomStateException;
 
 public class RoomModel {
     private RoomName roomName;
@@ -30,14 +30,14 @@ public class RoomModel {
 
     public void enable() {
         if (this.roomStatus == RoomStatus.ENABLED) {
-            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
+            throw InvalidRoomStatusException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
         }
         this.roomStatus = RoomStatus.ENABLED;
     }
 
     public void disable() {
         if (this.roomStatus == RoomStatus.DISABLED) {
-            throw InvalidRoomStateException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
+            throw InvalidRoomStatusException.becauseRedundantTransition(this.roomStatus.name(), this.roomNum.num());
         }
         this.roomStatus = RoomStatus.DISABLED;
     }
