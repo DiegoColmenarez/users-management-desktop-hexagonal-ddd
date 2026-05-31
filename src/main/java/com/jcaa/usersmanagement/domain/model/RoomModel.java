@@ -45,7 +45,7 @@ public class RoomModel {
         if (!this.roomName.equals(newName)){
             this.rename(newName);
         }
-        if (this.roomStatus.equals(targetStatus)) {
+        if (!this.roomStatus.equals(targetStatus)) {
             if (targetStatus == RoomStatus.ENABLED) {
                 this.enable();
             } else if (targetStatus == RoomStatus.DISABLED) {
